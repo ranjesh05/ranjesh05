@@ -1,100 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Do You Accept the Offer?</title>
-    <style>
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<title>Do You Accept the Offer?</title>
 
-        .container {
-            text-align: center;
-            position: relative;
-        }
+<style>
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
 
-        h1 {
-            margin-bottom: 30px;
-            color: #333;
-        }
+.container {
+    position: relative;
+    text-align: center;
+}
 
-        button {
-            padding: 12px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+}
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-            margin-right: 20px;
-        }
+button {
+    padding: 14px 32px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-        #noBtn {
-            background-color: #555;
-            color: white;
-            position: absolute;
-        }
+#yesBtn {
+    background: #ff4d6d;
+    color: #fff;
+}
 
-        .heart-popup {
-            display: none;
-            margin-top: 30px;
-            font-size: 60px;
-            animation: pop 0.5s ease;
-        }
+#noBtn {
+    background: #555;
+    color: #fff;
+    position: absolute;
+}
 
-        @keyframes pop {
-            0% { transform: scale(0.5); }
-            100% { transform: scale(1); }
-        }
-    </style>
+.heart {
+    display: none;
+    font-size: 70px;
+    margin-top: 30px;
+    animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+</style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Do you accept the offer? 💍</h1>
+<div class="container" id="container">
+    <h1>Do you accept the offer? 💖</h1>
 
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
 
-    <div class="heart-popup" id="heart">❤️</div>
+    <div class="heart" id="heart">❤️</div>
 </div>
 
 <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const heart = document.getElementById("heart");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const heart = document.getElementById("heart");
+const container = document.getElementById("container");
 
-    // Initial position for No button
-    noBtn.style.top = "60px";
-    noBtn.style.left = "120px";
+// initial position
+noBtn.style.left = "120px";
+noBtn.style.top = "70px";
 
-    noBtn.addEventListener("mouseover", () => {
-        const container = document.querySelector(".container");
+function moveNoButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
 
-        const maxX = container.offsetWidth - noBtn.offsetWidth;
-        const maxY = container.offsetHeight - noBtn.offsetHeight;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
 
-        noBtn.style.left = randomX + "px";
-        noBtn.style.top = randomY + "px";
-    });
+// Desktop
+noBtn.addEventListener("mouseover", moveNoButton);
 
-    yesBtn.addEventListener("click", () => {
-        heart.style.display = "block";
-        alert("You said YES! ❤️🥰");
-    });
+// Mobile
+noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("touchmove", moveNoButton);
+
+yesBtn.addEventListener("click", () => {
+    heart.style.display = "block";
+    alert("You chose YES! ❤️🥰");
+});
 </script>
 
 </body>
 </html>
-
